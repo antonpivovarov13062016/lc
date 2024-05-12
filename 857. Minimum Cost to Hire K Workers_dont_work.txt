@@ -1,0 +1,79 @@
+class Solution(object):
+    
+    def mincostToHireWorkers(self, quality, wage, k):
+        """
+        :type quality: List[int]
+        :type wage: List[int]
+        :type k: int
+        :rtype: float
+        """
+        def rS(elems_k_list, wage, k):
+            i = 0
+            while i < len(wage):
+                if not (i in elems_k_list):
+                    if len(elems_k_list) < k:
+                        elems_k_list.append(i)
+                        elems_k_list = rS(elems_k_list, wage, k)
+                        break
+                    else:
+                        return elems_k_list                    
+                i = i + 1
+            return elems_k_list
+
+        nums_k_iter = []
+        elems_k = []
+        sum_iter = []
+            
+        elems_k = rS([], wage, k)
+        nums_k_iter.append(elems_k)
+
+        print(nums_k_iter)
+        if len(quality) == 1:
+            return wage[0]
+        if len(quality) == k:
+            return sum(wage)
+
+        
+        effect_array = []
+        num_to_work_array = []
+
+        return 0
+
+
+import itertools
+class Solution(object):
+    
+    def mincostToHireWorkers(self, quality, wage, k):
+        """
+        :type quality: List[int]
+        :type wage: List[int]
+        :type k: int
+        :rtype: float
+        """
+        def rS(elems_k_list, wage, k):
+            i = 0
+            while i < len(wage):
+                if not (i in elems_k_list):
+                    if len(elems_k_list) < k:
+                        elems_k_list.append(i)
+                        elems_k_list = rS(elems_k_list, wage, k)
+                        break
+                    else:
+                        return elems_k_list                    
+                i = i + 1
+            return elems_k_list
+        per = itertools.permutations(range(0, len(wage)), k)
+        for el in per:
+            print(el) 
+
+        for el1 in per:    
+            i = 0
+            while i < len(el1):
+                j = 0
+                while j < len(el1):    
+                    if i != j:
+                        if el1[i] 
+                    j = j + 1
+                i = i + 1
+        return 0
+    
