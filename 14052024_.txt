@@ -1,0 +1,30 @@
+qw_multi = []
+        i4 = 0
+        while(i4 < len(wage)):
+            qw_multi.append(Decimal(wage[i4]) / Decimal(quality[i4]))            
+            i4 = i4 + 1
+        
+
+        i5 = 0
+        while(i5 < len(wage)):
+            qw_multi
+            i5 = i5 + 1
+
+        i3 = 0
+        while(i3 < len(wage)):
+            j3 = 0
+            while(j3 < len(wage)):
+                if qw_multi[i3] < qw_multi[j3]:
+                    el = qw_multi[i3]
+                    qw_multi[i3] = qw_multi[j3] 
+                    qw_multi[j3] = el
+
+                    el = wage[i3]
+                    wage[i3] = wage[j3] 
+                    wage[j3] = el
+
+                    el = quality[i3]
+                    quality[i3] = quality[j3] 
+                    quality[j3] = el
+                j3 = j3 + 1
+            i3 = i3 + 1

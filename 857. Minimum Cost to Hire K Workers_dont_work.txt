@@ -76,4 +76,72 @@ class Solution(object):
                     j = j + 1
                 i = i + 1
         return 0
+
+
+Мы хотим нанять ровно k работников, чтобы сформировать оплачиваемую группу. Чтобы нанять группу из k работников, мы должны заплатить им в соответствии со следующими правилами:
+
+Каждому работнику в оплачиваемой группе должна быть выплачена как минимум минимальная заработная плата, которую он ожидает.
+В группе зарплата каждого работника должна быть прямо пропорциональна его качеству. Это означает, что если качество работника в два раза выше, чем у другого работника в группе, то ему следует платить в два раза больше, чем другому работнику.
+Учитывая целое число k, верните наименьшую сумму денег, необходимую для формирования платной группы, удовлетворяющей вышеуказанным условиям. Принимаются ответы в пределах 10-5 от фактического ответа.
+
+
+
+import itertools
+from decimal import *
+class Solution(object):
+    
+    def mincostToHireWorkers(self, quality, wage, k):
+        """
+        :type quality: List[int]
+        :type wage: List[int]
+        :type k: int
+        :rtype: float
+        """
+        def rS(elems_k_list, wage, k):
+            i = 0
+            while i < len(wage):
+                if not (i in elems_k_list):
+                    if len(elems_k_list) < k:
+                        elems_k_list.append(i)
+                        elems_k_list = rS(elems_k_list, wage, k)
+                        break
+                    else:
+                        return elems_k_list                    
+                i = i + 1
+            return elems_k_list
+        per = itertools.permutations(range(0, len(wage)), k)
+ 
+                
+        min_sum = 100000
+        group_wms = []
+        for group1 in per:    
+           
+            wage_copy = wage[:]
+            i = 0
+            while i < len(group1):
+                j = 0
+                while j < len(group1):    
+                    if i != j:
+                        r = 8
+                        koef1 = Decimal(Decimal(quality[group1[i]]) / Decimal(quality[group1[j]]))
+                        if koef1 * Decimal(wage[group1[j]]) > Decimal(wage[group1[i]]):
+                            wage[group1[i]] = Decimal(koef1 * Decimal(wage[group1[j]]))
+                    j = j + 1                
+                i = i + 1 
+         
+                
+            group_sum = Decimal("0.00000") # 2.8
+            for el in group1:
+                    group_sum = group_sum + wage[el]
+            if min_sum > group_sum:
+                    min_sum = group_sum
+                    group_wms = group1
+            wage_end = wage[:]
+            wage = wage_copy[:]
+        
+        print("wage_end" + str(wage_end))
+        print("group_wms" + str(group_wms))
+        return min_sum
+    
+
     

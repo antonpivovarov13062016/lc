@@ -1,0 +1,57 @@
+import itertools
+from decimal import *
+class Solution(object):
+    
+    def mincostToHireWorkers(self, quality, wage, k):
+        """
+        :type quality: List[int]
+        :type wage: List[int]
+        :type k: int
+        :rtype: float
+        """
+        def quantize5(number):
+            return number #.quantize(Decimal("1.000000"))
+        
+        per = set(itertools.permutations(range(0, len(wage)), k))
+        per2 = []
+        for group1 in per:    
+            sgr = sorted(group1)
+            if not(sgr in per2):
+                per2.append(sgr)        
+        print(str(sorted(per2)))
+
+        q_w = 
+        i3 = 0
+        while(i3 < len(wage))
+            j3 = 0
+            while(j3 < len(wage))
+                if wage[i3] 
+                j3 = j3 + 1
+            i3 = i3 + 1
+        group_wms = []
+        min_sum = Decimal("100001.000000")
+        print(quantize5(Decimal(1.123456)))
+        for group1 in per2:    
+            wage_copy = wage[:]
+            i = 0
+            while i < k:
+                j = 0
+                while j < k:    
+                    if i != j:
+                        koef1 = quantize5(Decimal(quantize5(Decimal(quality[group1[i]])) / quantize5(Decimal(quality[group1[j]]))))
+                        if koef1 * Decimal(wage[group1[j]]) > Decimal(wage[group1[i]]):
+                                wage[group1[i]] = quantize5(Decimal(koef1 * Decimal(wage[group1[j]])))
+                    j = j + 1    
+                i = i + 1 
+            group_sum = Decimal("0.000000") # 2.8
+            for el in group1:
+                  group_sum = group_sum + wage[el]
+            if min_sum > group_sum:
+                    min_sum = group_sum
+                    group_wms = group1
+            wage_end = wage[:]
+            wage = wage_copy[:]        
+        print("wage_end" + str(wage_end))
+        print("group_wms" + str(group_wms))
+        return min_sum
+    

@@ -1,0 +1,76 @@
+import itertools
+from decimal import *
+class Solution(object):
+    
+    def mincostToHireWorkers(self, quality, wage, k):
+        """
+        :type quality: List[int]
+        :type wage: List[int]
+        :type k: int
+        :rtype: float
+        """
+        def quantize5(number):
+            return number #.quantize(Decimal("1.000000"))
+        
+        per = set(itertools.permutations(range(0, len(wage)), k))
+        per2 = []
+        for group1 in per:    
+            sgr = sorted(group1)
+            if not(sgr in per2):
+                per2.append(sgr)        
+        per2 = sorted(per2)
+        
+        group_wms = []
+        min_sum = Decimal(100001.000000)
+        wage_dec = []
+        quality_dec = []
+        w_q_dec = []
+        for w in wage:
+            wage_dec.append(Decimal(w))
+        for q in quality:
+            quality_dec.append(Decimal(q))
+
+        l = len(wage)
+        
+        i = 0
+        while i < l:
+            w_q_dec.append(wage_dec[i]  / quality_dec[i])
+            i = i + 1
+        mult_q_and_w_q = []
+        i = 0
+        while i < l:
+            j = 0
+            arr = []
+            while j < l:
+                arr.append(w_q_dec[j] * quality_dec[i])
+                j = j + 1
+            mult_q_and_w_q.append(arr)    
+            i = i + 1
+        n = 0
+        while n < len(per2):
+            group1 = per2[n]
+            wage_copy = wage_dec[:]
+            i = 0
+            while i < k:
+                j = 0
+                while j < k:    
+                    if i != j:
+                        #res_koef = quality_dec[group1[i]] * w_q_dec[group1[j]]
+                        if mult_q_and_w_q[group1[i]][group1[j]] > wage_dec[group1[i]]:
+                                wage_dec[group1[i]] = mult_q_and_w_q[group1[i]][group1[j]]
+                    j = j + 1    
+                i = i + 1 
+       
+            group_sum = Decimal(0.000000) 
+            for el in group1:
+                  group_sum = group_sum + wage_dec[el]
+            
+            wage_dec = wage_copy[:] 
+            if min_sum > group_sum:
+                    min_sum = group_sum
+                    group_wms = group1          
+
+        #print("wage_end" + str(wage_dec))
+        #print("group_wms" + str(group_wms))
+        return min_sum
+    
