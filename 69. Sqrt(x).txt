@@ -1,0 +1,18 @@
+class Solution(object):
+    def mySqrt(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        if x == 0:
+            return 0
+        if x == 1:
+            return 1
+        i = 0
+        res = 1
+        tek_x = 2
+        while tek_x <= x:
+            res = res + 1
+            tek_x = res * res
+        print(tek_x)
+        return res - 1
