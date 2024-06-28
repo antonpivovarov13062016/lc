@@ -1,0 +1,6 @@
+Сообщение	Элемент	Процесс
+Can't convert System.Diagnostics.Process to LTools.Desktop.DesktopInst.	Присоединиться к приложению	Main.ltw
+Контрагенты
+
+
+EGRNPDF
